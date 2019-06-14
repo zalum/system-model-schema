@@ -1,0 +1,25 @@
+# https://c4model.com/#abstractions
+entities:
+  - label: software-system
+  - label: container
+  - label: component
+
+relations:
+  - label: contains
+    from: software-system
+    to: container
+  - label: contains
+    from: container
+    to: component
+  - label: operation
+    from: container
+    to: container
+  - label: operation
+    from: software-system
+    to: container
+  - label: operation
+    from: software-system
+    to: software-system
+  - label: operation
+    from: container
+    to: software-system

@@ -1,0 +1,29 @@
+entities:
+  - label: table
+  - label: column
+  - label: database-user
+
+relations:
+# datamodel  
+  - label: contains
+    from: dabatase-user
+    to: table
+  - label: contains
+    from: table
+    to: column
+  - label: foreign-key
+    from: column
+    to: column
+# db grants
+  - label: uses
+    from: database-user
+    to: table
+  - label: reads
+    from: database-user
+    to: table
+  - label: writes
+    from: database-user
+    to: table
+  - label: deletes
+    from: database-user
+    to: table

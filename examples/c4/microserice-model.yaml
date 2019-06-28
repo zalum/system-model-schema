@@ -1,0 +1,27 @@
+nodes:
+  - name: booking.com
+    type: software-system
+  - name: Booking Service
+    type: component
+  - name: Reservation Service
+    type: component
+  - name: Stock Service
+    type: component
+relations:
+  - type: contains
+    from: Booking Service
+    to: Booking Service
+  - type: contains
+    from: Booking Service
+    to: Reservation Service
+  - type: contains
+    from: Booking Service
+    to: Stock Service
+  - type: operation
+    from: Booking Service
+    to: Reservation Service
+    name: Create Reservation
+  - type: operation
+    from: Reservation Service
+    to: Stock Service
+    name: Check Stock

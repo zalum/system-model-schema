@@ -1,25 +1,34 @@
 # https://c4model.com/#abstractions
-entities:
-  - label: software-system
-  - label: container
-  - label: component
+includes:
+  - base-model.yaml
+types:
+  - name: software-system
+    extends: base.system-node
+  - name: container
+    extends: base.system-node
+  - name: component
+    extends: base.system-node
 
 relations:
-  - label: contains
+  - name: contains
     from: software-system
     to: container
-  - label: contains
+  - name: contains
     from: container
     to: component
-  - label: operation
+  - name: operation
     from: container
     to: container
-  - label: operation
+    extends: base.operation
+  - name: operation
     from: software-system
     to: container
-  - label: operation
+    extends: base.operation
+  - name: operation
     from: software-system
     to: software-system
-  - label: operation
+    extends: base.operation
+  - name: operation
     from: container
     to: software-system
+    extends: base.operation

@@ -1,0 +1,24 @@
+@startuml
+title A Monolithic Style Architecture
+component bss as "booking.com\n[software system]\n"{
+ folder bssc as "Application server\n[container]"{
+  component bs as "Booking Service\n[component]"
+  component rs as "Reservation Service\n[component]"
+  component ss as "Stock service\n[component]"
+ }
+}
+bs --> rs: Create Reservation
+rs --> ss: Check Stock
+
+newpage
+title A Microservice Style Architecture
+
+component bss as "booking.com\n[software system]\n"{
+  component bs as "Booking Service\n[container]"
+  component ra as "Reservation API\n[container]"
+  component sa as "Stock API\n[container]"
+}
+bs --> ra: Create Reservation
+ra --> sa: Check Stock
+
+@enduml

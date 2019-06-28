@@ -1,0 +1,19 @@
+name: base
+types:
+  - name: system-node
+    properties:
+      - name: name
+        type: string
+        required: true
+relations:
+  - name: relation
+    properties:
+        - name: name
+          required: true
+  - name: operation
+    extends: relation
+    properties:
+      - name: protocol
+        type: string
+      - name: format
+        type: string

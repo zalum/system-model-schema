@@ -1,0 +1,25 @@
+nodes:
+  - name: booking.com
+    type: software-system
+  - name: Application Server
+    type: container
+  - name: Booking Service
+    type: component
+  - name: Reservation Service
+    type: component
+  - name: Stock Service
+    type: component
+
+relations:
+  - type: contains
+    from: booking.com
+    to: Application Server
+  - type: contains
+    from: Application Server
+    to: Booking Service
+  - type: contains
+    from: Application Server
+    to: Reservation Service
+  - type: contains
+    from: Application Server
+    to: Stock Service

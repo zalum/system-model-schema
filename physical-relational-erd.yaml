@@ -1,29 +1,32 @@
-entities:
-  - label: table
-  - label: column
-  - label: database-user
-
+types:
+  - name: table
+    extends: base.system-node
+  - name: column
+    extends: base.system-node
+  - name: database-user
+    extends: base.system-node
+    
 relations:
-# datamodel  
-  - label: contains
+# datamodel
+  - name: contains
     from: dabatase-user
     to: table
-  - label: contains
+  - name: contains
     from: table
     to: column
-  - label: foreign-key
+  - name: foreign-key
     from: column
     to: column
 # db grants
-  - label: uses
+  - name: uses
     from: database-user
     to: table
-  - label: reads
+  - name: reads
     from: database-user
     to: table
-  - label: writes
+  - name: writes
     from: database-user
     to: table
-  - label: deletes
+  - name: deletes
     from: database-user
     to: table

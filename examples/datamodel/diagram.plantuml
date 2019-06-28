@@ -1,0 +1,34 @@
+@startuml
+
+class Restaurants{
+  + id
+  + name
+  + stars
+  + cuisine
+}
+
+class Tables{
+  + id
+  + number
+  + no_chairs
+  + restaurant_id
+}
+
+class Orders{
+  + id
+  + amount
+  + table_id
+  + cashier_id
+  + waiter_id
+}
+
+class Waiter{
+  + id
+  + name
+}
+
+Tables::id <-- Orders::table_id
+Tables::restaurant_id  --> Restaurants::id
+Orders::cashier_id --> Waiter::id: cash the bill
+Orders::cashier_id --> Waiter::id: takes order
+@enduml

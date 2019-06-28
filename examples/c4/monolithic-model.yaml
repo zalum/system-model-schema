@@ -23,3 +23,11 @@ relations:
   - type: contains
     from: Application Server
     to: Stock Service
+  - type: operation
+    from: Booking Service
+    to: Reservation Service
+    name: Create Reservation
+  - type: operation
+    from: Reservation Service
+    to: Stock Service
+    name: Check Stock

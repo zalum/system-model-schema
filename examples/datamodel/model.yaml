@@ -1,0 +1,49 @@
+nodes:
+# tables
+  - name: Restaurants
+    type: table
+  - name: Tables
+    type: table
+  - name: Orders
+    type: table
+  - name: Waiter
+    type: table
+# columns
+  - name: restaurant_id
+    caption: id
+    type: column
+  - name: restaurant_name
+    caption: name
+    type: column
+  - name: restaurant_stars
+    caption: name
+    type: column
+  - name: restaurant_cuisine
+    caption: cuisine
+    type: column
+  - name: table_id
+    caption: id
+    type: column
+  - name: table_number
+    caption: number
+    type: column
+  - name: table_no_chairs
+    name: no_chairs
+    type: column
+  - name: table_restaurant_id
+    caption: restaurant_id
+    type: column
+  - name: order_id
+    caption: id
+    type: column
+# ...
+relations:
+# columns of table
+  - from: table_id
+    to: Tables
+# ...
+# foreign keys
+  - from: table_restaurant_id
+    to: restaurant_id
+    type: foreign-key
+# ...

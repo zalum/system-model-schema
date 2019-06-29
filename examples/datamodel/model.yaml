@@ -39,8 +39,9 @@ nodes:
 # ...
 relations:
 # columns of table
-  - from: table_id
-    to: Tables
+  - from: Tables
+    to: table_id
+    type: contains
 # ...
 # foreign keys
   - from: table_restaurant_id

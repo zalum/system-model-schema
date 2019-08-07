@@ -18,9 +18,6 @@ relations:
     from: column
     to: column
 # db grants
-  - name: uses
-    from: database-user
-    to: table
   - name: reads
     from: database-user
     to: table

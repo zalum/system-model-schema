@@ -1,0 +1,18 @@
+includes:
+  - physiscal-relational-erd.yaml
+types:
+  - name: bounded-context
+    extends: base.system-node
+relations:
+  - name: owns
+    from: bounded-context
+    to: dabatase-user
+  - name: owns
+    from: bounded-context
+    to: table
+  - name: reads
+    from: bounded-context
+    to: table
+  - name: writes
+      from: bounded-context
+      to: table

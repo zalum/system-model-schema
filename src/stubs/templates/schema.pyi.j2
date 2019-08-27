@@ -1,0 +1,13 @@
+class Node:
+    def __init__(self, name):
+        self.name = name
+
+class Nodes: {% for node in nodes %}
+    {{node.name}} = ... # type: str{% endfor %}
+    def get_node(key:str)->Node
+
+class SystemModelSchema:
+    nodes = ... #type: Nodes
+
+system_model_schema = ... # type: SystemModelSchema
+nodes = ... # type: Nodes

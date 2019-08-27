@@ -1,3 +1,4 @@
+name: datamodel
 types:
   - name: table
     extends: base.system-node

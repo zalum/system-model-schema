@@ -1,4 +1,5 @@
 # https://c4model.com/#abstractions
+name: c4
 includes:
   - base-model.yaml
 types:

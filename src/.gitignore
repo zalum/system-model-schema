@@ -2,3 +2,5 @@
 dist/*
 build/*
 sms/*.yaml
+*.pyc
+**/__pycache__/**

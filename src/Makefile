@@ -5,6 +5,9 @@ clean:
 		rm -rf build
 		rm -rf dist
 		rm -rf system_model_schema.egg-info
+
+test:
+        pytest
 include-schema:
 		cp ../schema/*.yaml  sms
 build: clean include-schema

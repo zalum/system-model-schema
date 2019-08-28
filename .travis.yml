@@ -5,4 +5,4 @@ python:
 install:
   - make build-spec
 
-script: pytest
+script: nose2

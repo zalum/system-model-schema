@@ -4,3 +4,4 @@ build/*
 sms/*.yaml
 *.pyc
 **/__pycache__/**
+sms/test/**

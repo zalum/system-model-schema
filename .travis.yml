@@ -19,4 +19,4 @@ deploy:
       - target/system-model-schema-0.0.1.dev1.zip
     draft: true
     on:
-      branch: master
+      branch: feature/python_support

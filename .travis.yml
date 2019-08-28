@@ -9,3 +9,13 @@ install:
   - make build-spec
 
 script: cd src; make test
+
+deploy:
+    provider: releases
+    api_key: "$GITHUB_OAUTH_TOKEN"
+    file:
+      - src/dist/system_model_schema-0.0.1.dev1_20190822-py3-none-any.whl
+      - target/system-model-schema-0.0.1.dev1.zip
+    draft: true
+    on:
+      branch: master

@@ -6,10 +6,12 @@ clean:
 		rm -rf dist
 		rm -rf system_model_schema.egg-info
 
-test:
-        pytest
 include-schema:
 		cp ../schema/*.yaml  sms
-build: clean include-schema
+
+test: include-schema
+		nose2
+
+build: clean test
 		python3 setup.py bdist_wheel egg_info -d -v
 

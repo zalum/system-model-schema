@@ -8,4 +8,4 @@ python:
 install:
   - make build-spec
 
-script: nose2
+script: cd src; make test

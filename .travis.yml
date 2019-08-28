@@ -7,8 +7,9 @@ python:
 
 install:
   - make build-spec
+  - cd src; make build
 
-script: cd src; make test
+script: ls
 
 deploy:
     provider: releases

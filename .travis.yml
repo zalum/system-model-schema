@@ -10,8 +10,9 @@ install:
   - make -C src build
   - export SPEC_ARTIFACT=`make get-artifact-name`
   - export PYTHON_ARTIFACT=src/`make -s -C src get-artifact-name`
-script: ls
-
+script:
+  - ls target
+  - ls src/dist
 deploy:
     provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"

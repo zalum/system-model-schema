@@ -7,9 +7,9 @@ python:
 
 install:
   - make build-spec
-  - cd src; make build
+  - make -C src build
   - export SPEC_ARTIFACT=`make get-artifact-name`
-  - export PYTHON_ARTIFACT=`cd src; make get-artifact-name`
+  - export PYTHON_ARTIFACT=`make -s -C src get-artifact-name`
 script: ls
 
 deploy:

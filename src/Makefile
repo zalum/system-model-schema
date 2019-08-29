@@ -1,3 +1,5 @@
+pwd := $(shell pwd)
+
 generate_stubs:
 		export env=dev;python3 -m stubs.generate
 
@@ -14,4 +16,7 @@ test: include-schema
 
 build: clean test
 		python3 setup.py bdist_wheel egg_info -d -v
+
+get-artifact-name:
+		@ls $(pwd)/dist/*.whl
 

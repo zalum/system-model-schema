@@ -8,15 +8,16 @@ python:
 install:
   - make build-spec
   - cd src; make build
-
+  - export SPEC_ARTIFACT=`make get-artifact-name`
+  - export PYTHON_ARTIFACT=`cd src; make get-artifact-name`
 script: ls
 
 deploy:
     provider: releases
     api_key: "$GITHUB_OAUTH_TOKEN"
     file:
-      - src/dist/system_model_schema-0.0.1.dev1_20190822-py3-none-any.whl
-      - target/system-model-schema-0.0.1.dev1.zip
+      - "$SPEC_ARTIFACT"
+      - "$PYTHON_ARTIFACT"
     draft: true
     on:
       branch: feature/python_support

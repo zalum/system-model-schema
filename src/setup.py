@@ -2,9 +2,13 @@ from setuptools import setup, find_packages
 import os
 
 
-def __get_version():
+def __get_version(developement=False):
     file = open("../version.txt", "r")
-    return file.readlines()[0]
+    version = file.readlines()[0]
+    if developement:
+        version += ".dev1"
+    return version
+
 
 
 def get_schema_files():
@@ -23,7 +27,7 @@ def __get_schema_files():
 setup(
     name='system-model-schema',
 
-    version=__get_version(),
+    version=__get_version(developement=True),
 
     description="System Model Schema Python API",
     long_description='''

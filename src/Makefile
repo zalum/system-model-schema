@@ -1,5 +1,5 @@
 generate_stubs:
-		export env=dev;python3 -m stubs.generate
+		python3 -m stubs.generate
 
 clean:
 		rm -rf build

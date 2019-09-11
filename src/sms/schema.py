@@ -1,111 +1,111 @@
-from sms.loader import get_schemas
+from sms.generic_types import Nodes, Schema, Node, SchemaElement
 
 
-class Attribute:
-    def get_name(self):
-        pass
 
-    def get_value(self):
-        pass
-
-    def get_getter_value(self):
-        pass
+class base_nodes(Nodes):
+    system_node = "system_node"  # type: str
 
 
-class DynamicAttributesObject:
-    def __init__(self, attributes: [Attribute]):
-        self._attribute_values = dict()
-        self._save_attribute_values(attributes)
-        self._update_getters(attributes)
-
-    def _save_attribute_values(self, attributes: [Attribute]):
-        for attribute in attributes:
-            name = attribute.get_name()
-            self._attribute_values[name] = attribute.get_value()
-
-    def _update_getters(self, attributes: [Attribute]):
-        for a in attributes:
-            attribute_name = a.get_name()
-            getter_value = a.get_getter_value()
-            self.__dict__.update({attribute_name: getter_value})
-
-    def values(self):
-        return self._attribute_values.values()
+base_nodes.set_values({ 
+    "system_node": Node("system_node"),
+})
 
 
-class Node(Attribute):
-    def __init__(self, name):
-        self.name = name
-
-    def __repr__(self):
-        return self.name
-
-    def get_name(self):
-        return self.name
-
-    def get_value(self):
-        return self
-
-    def get_getter_value(self):
-        return self.get_name()
+class base(Schema):
+    name = "base"
+    file = "base-model.yaml"
+    nodes = base_nodes
 
 
-class Schema(Attribute):
 
-    @staticmethod
-    def create_schema(name, file, nodes_list):
-        nodes = list(map(lambda n: Node(n), nodes_list))
-        properties = dict(name=name, file=file, nodes=Nodes(nodes))
-        Schema.__update_properties(properties, nodes_list)
-        schema_type = type(name, (Schema,), properties)
-        __this_module = globals()
-        __this_module[name] = schema_type
-        return schema_type()
-
-    def get_name(self):
-        return self.name
-
-    def get_value(self):
-        return self
-
-    def get_getter_value(self):
-        return self
-
-    @staticmethod
-    def __update_properties(properties, nodes_list):
-        for node in nodes_list:
-            properties[node] = node
+class bounded_context_nodes(Nodes):
+    bounded_context = "bounded_context"  # type: str
 
 
-class Nodes(DynamicAttributesObject):
-    def __init__(self, nodes_list: [Node] = []):
-        super().__init__(nodes_list)
-
-    def get_node(self, key: str):
-        return self._attribute_values[key]
-
-    def add(self, nodes_to_append: 'Nodes'):
-        nodes_list = nodes_to_append.values()
-        self._save_attribute_values(nodes_list)
-        self._update_getters(nodes_list)
-
-    def list(self):
-        return list(self._attribute_values.values())
+bounded_context_nodes.set_values({ 
+    "bounded_context": Node("bounded_context"),
+})
 
 
-class Schemas(DynamicAttributesObject):
-    def __init__(self, schemas_list: [Schema]):
-        super().__init__(schemas_list)
+class bounded_context(Schema):
+    name = "bounded_context"
+    file = "bounded-context.yaml"
+    nodes = bounded_context_nodes
 
 
-def __init_schema():
-    global schemas
-    global nodes
-    schemas_list = list(map(lambda s: Schema.create_schema(*s), get_schemas()))
-    schemas = Schemas(schemas_list)
-    nodes = Nodes()
-    for schema_nodes in map(lambda s: s.nodes, schemas_list):
-        nodes.add(schema_nodes)
+
+class c4_nodes(Nodes):
+    software_system = "software_system"  # type: str
+    container = "container"  # type: str
+    component = "component"  # type: str
 
 
-__init_schema()
+c4_nodes.set_values({ 
+    "software_system": Node("software_system"),
+    "container": Node("container"),
+    "component": Node("component"),
+})
+
+
+class c4(Schema):
+    name = "c4"
+    file = "c4-model.yaml"
+    nodes = c4_nodes
+
+
+
+class datamodel_nodes(Nodes):
+    table = "table"  # type: str
+    column = "column"  # type: str
+    database_user = "database_user"  # type: str
+
+
+datamodel_nodes.set_values({ 
+    "table": Node("table"),
+    "column": Node("column"),
+    "database_user": Node("database_user"),
+})
+
+
+class datamodel(Schema):
+    name = "datamodel"
+    file = "relational-datamodel.yaml"
+    nodes = datamodel_nodes
+
+
+class schemas(SchemaElement):
+    base = base
+    bounded_context = bounded_context
+    c4 = c4
+    datamodel = datamodel
+
+
+schemas.set_values({  
+    "base": base, 
+    "bounded_context": bounded_context, 
+    "c4": c4, 
+    "datamodel": datamodel,
+})
+
+
+class nodes(Nodes): 
+    system_node = "system_node"  # type: str     
+    bounded_context = "bounded_context"  # type: str     
+    software_system = "software_system"  # type: str    
+    container = "container"  # type: str    
+    component = "component"  # type: str     
+    table = "table"  # type: str    
+    column = "column"  # type: str    
+    database_user = "database_user"  # type: str    
+
+
+nodes.set_values({   
+    "system_node": Node("system_node"),  
+    "bounded_context": Node("bounded_context"),  
+    "software_system": Node("software_system"),
+    "container": Node("container"),
+    "component": Node("component"),  
+    "table": Node("table"),
+    "column": Node("column"),
+    "database_user": Node("database_user"),
+})

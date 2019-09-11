@@ -1,24 +1,24 @@
 from jinja2 import Environment, FileSystemLoader
 
-from sms.schema import system_model_schema
+from stubs import loader
 
-__stub_name = "schema.pyi"
+__module_file = "schema.py"
 
 
 def generate_stubs():
-    nodes = system_model_schema.nodes
-    stub = __render_stubs(nodes)
-    file = open("./sms/" + __stub_name, "w")
+    properties = dict(schemas=loader.get_schemas())
+    stub = __render_stubs(**properties)
+    file = open("./sms/" + __module_file, "w")
     file.write(stub)
     file.close()
 
 
-def __render_stubs(nodes):
+def __render_stubs(**properties):
     env = Environment(
         loader=FileSystemLoader("./stubs/templates")
     )
-    template = env.get_template(__stub_name + ".j2")
-    return template.render(nodes=nodes.list())
+    template = env.get_template(__module_file + ".j2")
+    return template.render(properties)
 
 
 if __name__ == "__main__":

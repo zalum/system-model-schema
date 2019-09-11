@@ -1,0 +1,35 @@
+from sms.generic_types import Nodes, Schema, Node, SchemaElement
+{% for schema in schemas %}
+{% set  schema_name = schema[0]%}
+{% set  schema_file = schema[1]%}
+class {{schema_name}}_nodes(Nodes):{% for node in schema[2] %}
+    {{node}} = "{{node}}"  # type: str{% endfor %}
+
+
+{{schema_name}}_nodes.set_values({ {% for node in schema[2] %}
+    "{{node}}": Node("{{node}}"),{% endfor %}
+})
+
+
+class {{schema_name}}(Schema):
+    name = "{{schema_name}}"
+    file = "{{schema_file}}"
+    nodes = {{schema_name}}_nodes
+{% endfor %}
+
+class schemas(SchemaElement):{% for schema in schemas %}{% set  schema_name = schema[0]%}
+    {{schema_name}} = {{schema_name}}{% endfor %}
+
+
+schemas.set_values({ {% for schema in schemas %} {% set  schema_name = schema[0]%}
+    "{{schema_name}}": {{schema_name}},{% endfor %}
+})
+
+
+class nodes(Nodes):{% for schema in schemas %} {% for node in schema[2] %}
+    {{node}} = "{{node}}"  # type: str    {%endfor%}{%endfor%}
+
+
+nodes.set_values({ {% for schema in schemas %}  {% for node in schema[2] %}
+    "{{node}}": Node("{{node}}"),{% endfor %}{% endfor %}
+})

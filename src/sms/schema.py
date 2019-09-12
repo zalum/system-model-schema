@@ -1,4 +1,4 @@
-from sms.generic_types import Nodes, Schema, Node, SchemaElement
+from sms.generic_types import Nodes, Schema, Node, Relations, SchemaElement
 
 
 
@@ -9,7 +9,6 @@ class base_nodes(Nodes):
 base_nodes.set_values({ 
     "system_node": Node("system_node"),
 })
-
 
 class base(Schema):
     name = "base"
@@ -25,7 +24,6 @@ class bounded_context_nodes(Nodes):
 bounded_context_nodes.set_values({ 
     "bounded_context": Node("bounded_context"),
 })
-
 
 class bounded_context(Schema):
     name = "bounded_context"
@@ -46,7 +44,6 @@ c4_nodes.set_values({
     "component": Node("component"),
 })
 
-
 class c4(Schema):
     name = "c4"
     file = "c4-model.yaml"
@@ -66,11 +63,54 @@ datamodel_nodes.set_values({
     "database_user": Node("database_user"),
 })
 
-
 class datamodel(Schema):
     name = "datamodel"
-    file = "relational-datamodel.yaml"
+    file = "datamodel.yaml"
     nodes = datamodel_nodes
+
+
+
+class relations(Relations):
+    relation = "relation"
+    operation = "operation"
+    owns = "owns"
+    owns = "owns"
+    reads = "reads"
+    writes = "writes"
+    contains = "contains"
+    contains = "contains"
+    operation = "operation"
+    operation = "operation"
+    operation = "operation"
+    operation = "operation"
+    contains = "contains"
+    contains = "contains"
+    foreign_key = "foreign_key"
+    composition = "composition"
+    reads = "reads"
+    writes = "writes"
+    deletes = "deletes"
+
+
+relations.add_relation_pair("relation", "", "") 
+relations.add_relation_pair("operation", "", "") 
+relations.add_relation_pair("owns", "bounded_context", "dabatase_user") 
+relations.add_relation_pair("owns", "bounded_context", "table") 
+relations.add_relation_pair("reads", "bounded_context", "table") 
+relations.add_relation_pair("writes", "bounded_context", "table") 
+relations.add_relation_pair("contains", "software_system", "container") 
+relations.add_relation_pair("contains", "container", "component") 
+relations.add_relation_pair("operation", "container", "container") 
+relations.add_relation_pair("operation", "software_system", "container") 
+relations.add_relation_pair("operation", "software_system", "software_system") 
+relations.add_relation_pair("operation", "container", "software_system") 
+relations.add_relation_pair("contains", "dabatabe_user", "table") 
+relations.add_relation_pair("contains", "table", "column") 
+relations.add_relation_pair("foreign_key", "column", "column") 
+relations.add_relation_pair("composition", "table", "table") 
+relations.add_relation_pair("reads", "database_user", "table") 
+relations.add_relation_pair("writes", "database_user", "table") 
+relations.add_relation_pair("deletes", "database_user", "table") 
 
 
 class schemas(SchemaElement):

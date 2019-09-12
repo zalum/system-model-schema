@@ -1,15 +1,14 @@
-from sms.generic_types import Nodes, Schema, Node, SchemaElement
+from sms.generic_types import Nodes, Schema, Node, Relations, SchemaElement
 {% for schema in schemas %}
-{% set  schema_name = schema[0]%}
-{% set  schema_file = schema[1]%}
-class {{schema_name}}_nodes(Nodes):{% for node in schema[2] %}
+{% set  schema_name = schema['name']%}
+{% set  schema_file = schema['filename']%}
+class {{schema_name}}_nodes(Nodes):{% for node in schema['nodes'] %}
     {{node}} = "{{node}}"  # type: str{% endfor %}
 
 
-{{schema_name}}_nodes.set_values({ {% for node in schema[2] %}
+{{schema_name}}_nodes.set_values({ {% for node in schema['nodes'] %}
     "{{node}}": Node("{{node}}"),{% endfor %}
 })
-
 
 class {{schema_name}}(Schema):
     name = "{{schema_name}}"
@@ -17,19 +16,27 @@ class {{schema_name}}(Schema):
     nodes = {{schema_name}}_nodes
 {% endfor %}
 
-class schemas(SchemaElement):{% for schema in schemas %}{% set  schema_name = schema[0]%}
+
+class relations(Relations):{% for schema in schemas %}{% for relation in schema['relations'] %}
+    {{relation['name']}} = "{{relation['name']}}"{% endfor %}{% endfor %}
+
+{% for schema in schemas %}{% for relation in schema['relations'] %}
+relations.add_relation_pair("{{relation['name']}}", "{{relation['from']}}", "{{relation['to']}}") {% endfor %}{% endfor %}
+
+
+class schemas(SchemaElement):{% for schema in schemas %}{% set  schema_name = schema['name']%}
     {{schema_name}} = {{schema_name}}{% endfor %}
 
 
-schemas.set_values({ {% for schema in schemas %} {% set  schema_name = schema[0]%}
+schemas.set_values({ {% for schema in schemas %} {% set  schema_name = schema['name']%}
     "{{schema_name}}": {{schema_name}},{% endfor %}
 })
 
 
-class nodes(Nodes):{% for schema in schemas %} {% for node in schema[2] %}
+class nodes(Nodes):{% for schema in schemas %} {% for node in schema['nodes'] %}
     {{node}} = "{{node}}"  # type: str    {%endfor%}{%endfor%}
 
 
-nodes.set_values({ {% for schema in schemas %}  {% for node in schema[2] %}
+nodes.set_values({ {% for schema in schemas %}  {% for node in schema['nodes'] %}
     "{{node}}": Node("{{node}}"),{% endfor %}{% endfor %}
 })

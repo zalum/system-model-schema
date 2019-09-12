@@ -8,9 +8,9 @@ types:
     extends: base.system-node
     
 relations:
-# datamodel
+# relational datamodel
   - name: contains
-    from: dabatase-user
+    from: dabatabe-user
     to: table
   - name: contains
     from: table
@@ -18,6 +18,10 @@ relations:
   - name: foreign-key
     from: column
     to: column
+# nosql datamodel
+  - name: composition
+    from: table
+    to: table
 # db grants
   - name: reads
     from: database-user

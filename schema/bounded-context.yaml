@@ -1,6 +1,6 @@
 name: bounded-context
 includes:
-  - physiscal-relational-erd.yaml
+  - datamodel.yaml
 types:
   - name: bounded-context
     extends: base.system-node

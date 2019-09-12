@@ -8,7 +8,7 @@ def __escape_type(type_name: str):
     return type_name.replace("-", "_")
 
 
-def __get_nodes_from_file(schema):
+def __get_nodes(schema):
     return list(map(lambda t: __escape_type(t["name"]), schema["types"]))
 
 
@@ -35,11 +35,26 @@ def __get_schema_location():
     return '../schema'
 
 
+def __escape_relation_name(relation):
+    relation['name'] = __escape_type(relation['name'])
+    if 'from' in relation:
+        relation['from'] = __escape_type(relation['from'])
+        relation['to'] = __escape_type(relation['to'])
+    return relation
+
+
+def __get_relations(schema):
+    return list(map(__escape_relation_name, schema["relations"]))
+
+
 def get_schemas():
     schemas = []
     schema_files = __get_schema_files()
     for filename in schema_files:
-        file = open(filename[0]+"/"+filename[1])
+        file = open(filename[0] + "/" + filename[1])
         schema = yaml.load(file, Loader=yaml.Loader)
-        schemas.extend([(__escape_type(schema["name"]), filename[1], __get_nodes_from_file(schema))])
+        schemas.append(dict(name=__escape_type(schema["name"]),
+                            filename=filename[1],
+                            nodes=__get_nodes(schema),
+                            relations=__get_relations(schema)))
     return schemas

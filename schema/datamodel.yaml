@@ -10,7 +10,7 @@ types:
 relations:
 # relational datamodel
   - name: contains
-    from: dabatabe-user
+    from: database-user
     to: table
   - name: contains
     from: table
@@ -21,7 +21,7 @@ relations:
 # nosql datamodel
   - name: composition
     from: table
-    to: table
+    to: column
 # db grants
   - name: reads
     from: database-user

@@ -21,4 +21,4 @@ deploy:
       - "$PYTHON_ARTIFACT"
     draft: true
     on:
-      branch: feature/python_support
+      branch: master

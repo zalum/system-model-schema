@@ -27,7 +27,7 @@ def __get_schema_files():
 setup(
     name='system-model-schema',
 
-    version=__get_version(developement=True),
+    version=__get_version(),
 
     description="System Model Schema Python API",
     long_description='''

@@ -1,4 +1,6 @@
 # Goal
+[![Build Status](https://travis-ci.org/zalum/system-model-schema.svg?branch=master)](https://travis-ci.org/zalum/system-model-schema)
+
 System models can be boiled down to a graph of nodes and edges.
 ```
 [A: Software System] --[:calls]--> [B: API]

@@ -13,3 +13,6 @@ This, for example is not what we can expect in a C4 diagram.
 [A: Software System] --[:gives-satisfaction]--> [B: CEO]
 ```
 A schema definition will tell that the last example is not appropriate for a C4 diagram.
+
+# TODO-s
+

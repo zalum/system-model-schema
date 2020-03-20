@@ -35,3 +35,4 @@ class GenericTypesTest(unittest.TestCase):
         self.assertTrue(relation.supports(component, container))
         self.assertTrue(relation.supports(component, "container"))
         self.assertTrue(relation.supports(product, container))
+        self.assertTrue(relation.supports(container, product))

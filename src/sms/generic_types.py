@@ -46,7 +46,10 @@ class Relation:
 
     def supports(self, from_type, to_type) -> bool:
         if from_type in self.pairs:
-            return to_type in self.pairs[from_type]
+            if to_type in self.pairs[from_type]:
+                return True
+        if to_type in self.pairs:
+            return from_type in self.pairs[to_type]
         return False
 
 
